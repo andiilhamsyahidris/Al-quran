@@ -2,7 +2,7 @@ import 'package:alquran/domain/entities/ayat.dart';
 import 'package:equatable/equatable.dart';
 
 class AyatModel extends Equatable {
-  AyatModel({
+  const AyatModel({
     required this.numberInSurah,
     required this.text,
   });

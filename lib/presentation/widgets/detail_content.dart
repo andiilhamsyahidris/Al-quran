@@ -32,18 +32,27 @@ class DetailContent extends StatelessWidget {
                         ),
                   ),
                   Row(
-                    children: const [
-                      Icon(
-                        Icons.share,
-                        color: kDarkPurple,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.share,
+                          color: kDarkPurple,
+                        ),
                       ),
-                      Icon(
-                        Icons.play_arrow,
-                        color: kDarkPurple,
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.play_arrow,
+                          color: kDarkPurple,
+                        ),
                       ),
-                      Icon(
-                        Icons.bookmark,
-                        color: kDarkPurple,
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.bookmark,
+                          color: kDarkPurple,
+                        ),
                       ),
                     ],
                   )
