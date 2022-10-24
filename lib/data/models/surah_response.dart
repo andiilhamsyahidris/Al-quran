@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class SurahResponse extends Equatable {
   final List<SurahModel> surahList;
 
-  SurahResponse({required this.surahList});
+  const SurahResponse({required this.surahList});
 
   factory SurahResponse.fromJson(Map<String, dynamic> json) => SurahResponse(
         surahList: List<SurahModel>.from(

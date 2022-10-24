@@ -24,12 +24,24 @@ class DetailContent extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    detailSurah.englishName,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: kDarkPurple,
-                        ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        detailSurah.englishName,
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: kDarkPurple,
+                                ),
+                      ),
+                      Text(
+                        detailSurah.englishNameTranslation,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: kDarkPurple,
+                            ),
+                      ),
+                    ],
                   ),
                   Row(
                     children: [
@@ -62,17 +74,17 @@ class DetailContent extends StatelessWidget {
             Stack(
               children: [
                 Positioned(
-                  top: 32,
-                  left: 30,
+                  top: 27,
+                  left: 26,
                   child: Text(
                     'بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
                 Positioned(
                   child: Image.asset(
                     'assets/frame.png',
-                    height: 110,
+                    height: 80,
                   ),
                 ),
               ],

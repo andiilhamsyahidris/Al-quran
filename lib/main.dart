@@ -1,8 +1,10 @@
 import 'package:alquran/common/constant.dart';
 import 'package:alquran/common/utils.dart';
 import 'package:alquran/presentation/bloc/detail_surah_bloc/detail_surah_bloc.dart';
+import 'package:alquran/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:alquran/presentation/bloc/surah_list_bloc/surah_list_bloc.dart';
 import 'package:alquran/presentation/pages/home_surah_page.dart';
+import 'package:alquran/presentation/pages/search_page.dart';
 import 'package:alquran/presentation/pages/surah_page.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/injection.dart' as di;
@@ -26,6 +28,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<DetailSurahBloc>(),
         ),
+        BlocProvider(
+          create: (_) => di.locator<SearchBloc>(),
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -40,6 +45,8 @@ class MyApp extends StatelessWidget {
               final id = settings.arguments as int;
               return MaterialPageRoute(
                   builder: (_) => SurahPage(id: id), settings: settings);
+            case SearchPage.route_name:
+              return MaterialPageRoute(builder: (_) => SearchPage());
           }
         },
       ),

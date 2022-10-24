@@ -1,10 +1,10 @@
 import 'package:alquran/common/constant.dart';
 import 'package:alquran/presentation/bloc/surah_list_bloc/surah_list_bloc.dart';
+import 'package:alquran/presentation/pages/search_page.dart';
 import 'package:alquran/presentation/widgets/category_list.dart';
 import 'package:alquran/presentation/widgets/surah_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_scroll_to_top/flutter_scroll_to_top.dart';
 
 class HomeSurahPage extends StatefulWidget {
   @override
@@ -33,7 +33,9 @@ class _HomeSurahPageState extends State<HomeSurahPage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, SearchPage.route_name);
+              },
               icon: const Icon(
                 Icons.search,
                 color: kDarkPurple,
@@ -129,52 +131,41 @@ class _HomeSurahPageState extends State<HomeSurahPage> {
     return const CategoryList();
   }
 
-  ScrollWrapper _buildMainPage() {
-    return ScrollWrapper(
-      scrollController: ScrollController(keepScrollOffset: true),
-      promptAlignment: Alignment.bottomCenter,
-      promptAnimationCurve: Curves.elasticInOut,
-      promptDuration: const Duration(milliseconds: 400),
-      promptTheme: const PromptButtonTheme(color: kDarkPurple),
-      enabledAtOffset: 300,
-      scrollOffsetUntilVisible: 500,
-      builder: (context, properties) => SingleChildScrollView(
-        controller: properties.scrollController,
-        primary: properties.primary,
-        child: Column(
-          children: [
-            _buildDashboardPage(),
-            SizedBox(
-              child: _buildCategory(),
-            ),
-            BlocBuilder<SurahListBloc, SurahListState>(
-              builder: (context, state) {
-                if (state is SurahListLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is SurahListHasData) {
-                  final result = state.getSurahQuran;
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    controller: properties.scrollController,
-                    itemBuilder: (context, index) {
-                      final surah = result[index];
-                      return SurahList(surah);
-                    },
-                    itemCount: result.length,
-                  );
-                } else if (state is SurahListError) {
-                  return Center(
-                    child: Text(state.message),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ],
-        ),
+  SingleChildScrollView _buildMainPage() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildDashboardPage(),
+          SizedBox(
+            child: _buildCategory(),
+          ),
+          BlocBuilder<SurahListBloc, SurahListState>(
+            builder: (context, state) {
+              if (state is SurahListLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is SurahListHasData) {
+                final result = state.getSurahQuran;
+                return ListView.builder(
+                  shrinkWrap: true,
+                  controller: ScrollController(keepScrollOffset: true),
+                  itemBuilder: (context, index) {
+                    final surah = result[index];
+                    return SurahList(surah);
+                  },
+                  itemCount: result.length,
+                );
+              } else if (state is SurahListError) {
+                return Center(
+                  child: Text(state.message),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ],
       ),
     );
   }
